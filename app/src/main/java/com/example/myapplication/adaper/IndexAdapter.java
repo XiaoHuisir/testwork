@@ -1,5 +1,7 @@
 package com.example.myapplication.adaper;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.shape.RoundedCornerTreatment;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class IndexAdapter extends BaseAdapter {
 
+    public IndexItemClick itemClick;
 
     public IndexAdapter(List mDatas) {
         super(mDatas);
@@ -40,6 +43,23 @@ public class IndexAdapter extends BaseAdapter {
 
         TextView txt_study_state = (TextView)holder.getView(R.id.txt_study_state);
         txt_study_state.setText(bean.getJd());
+
+        ConstraintLayout layout = (ConstraintLayout) holder.getView(R.id.layout_item);
+        layout.setTag(String.valueOf(bean.getId()));
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = (String) v.getTag();
+                if(itemClick != null){
+                    itemClick.click(id);
+                }
+            }
+        });
+    }
+
+
+    public interface IndexItemClick{
+        void click(String id);
     }
 
 }

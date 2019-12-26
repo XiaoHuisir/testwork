@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.myapplication.bean.IndexBean;
 import com.example.myapplication.interfaces.IBasePresenter;
 import com.example.myapplication.interfaces.contract.IndexConstract;
 import com.example.myapplication.presenter.home.IndexPresenter;
+import com.example.myapplication.ui.acivity.video.VideoActivity;
 import com.example.myapplication.widgets.DrawableCenterTextView;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CourseFragment extends BaseFragment implements IndexConstract.View {
+public class CourseFragment extends BaseFragment implements IndexConstract.View, IndexAdapter.IndexItemClick {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -53,6 +55,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View 
     protected void initView() {
         list = new ArrayList<>();
         indexAdapter = new IndexAdapter(list);
+        indexAdapter.itemClick = this;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(indexAdapter);
 
@@ -107,5 +110,13 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View 
         txtType1.setTextColor(getResources().getColor(R.color.black));
         txtType2.setTextColor(getResources().getColor(R.color.black));
         txtType3.setTextColor(getResources().getColor(R.color.black));
+    }
+
+    @Override
+    public void click(String id) {
+        Intent intent = new Intent();
+        intent.setClass(context, VideoActivity.class);
+        intent.putExtra("curriulum_id",id);
+        startActivity(intent);
     }
 }

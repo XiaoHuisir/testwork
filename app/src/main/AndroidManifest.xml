@@ -21,6 +21,7 @@
             <!--</intent-filter>-->
         </activity> <!-- <meta-data android:name="com.google.android.actions" /> -->
         <activity android:name=".ui.acivity.login.VerifyActivity" />
+        <activity android:name=".ui.acivity.video.VideoActivity"/>
         <activity android:name=".ui.acivity.login.LoginActivity">
 
              <intent-filter>

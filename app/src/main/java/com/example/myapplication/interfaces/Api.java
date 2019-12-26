@@ -1,6 +1,7 @@
 package com.example.myapplication.interfaces;
 
 
+import com.example.myapplication.bean.CurriculumBean;
 import com.example.myapplication.bean.IndexBean;
 import com.example.myapplication.bean.LoginBean;
 import com.example.myapplication.bean.TypeIndexBean;
@@ -34,10 +35,10 @@ public interface Api {
     @FormUrlEncoded
     Flowable<TypeIndexBean> getIndex(@Header("x-access-token") String token, @Field("type") String type, @Field("page") String page);
 
-    @POST("index/train/type_index")
+    @POST("index/train/curriculum_show")
     @Headers({"Content-Type:application/x-www-form-urlencoded"})
     @FormUrlEncoded
-    Flowable<TypeIndexBean> getCurriculum(@Header("x-access-token") String token, @Field("curriculum_id") String curriculum_id);
+    Flowable<CurriculumBean> getCurriculum(@Header("x-access-token") String token, @Field("curriculum_id") String curriculum_id);
 
 
 
