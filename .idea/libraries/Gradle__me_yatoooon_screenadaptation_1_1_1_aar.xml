@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: me.yatoooon:screenadaptation:1.1.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ecb0ed110bf722fad8ec0e17047b06a8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ecb0ed110bf722fad8ec0e17047b06a8/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.yatoooon/screenadaptation/1.1.1/ab088ee1a89f3110041b26d3d018b035e000070/screenadaptation-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
