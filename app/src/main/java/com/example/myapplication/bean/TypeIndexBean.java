@@ -92,6 +92,8 @@ public class TypeIndexBean {
             private int type;
             private int is_select;
 
+            public boolean select;
+
             public int getId() {
                 return id;
             }
@@ -147,6 +149,8 @@ public class TypeIndexBean {
             private int add_time;
             private int type;
             private int is_select;
+
+            public boolean select;
 
             public int getId() {
                 return id;

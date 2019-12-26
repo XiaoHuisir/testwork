@@ -33,7 +33,7 @@ public interface Api {
     @POST("index/train/type_index")
     @Headers({"Content-Type:application/x-www-form-urlencoded"})
     @FormUrlEncoded
-    Flowable<TypeIndexBean> getIndex(@Header("x-access-token") String token, @Field("type") String type, @Field("page") String page);
+    Flowable<TypeIndexBean> getTypeIndex(@Header("x-access-token") String token, @Field("type") String type, @Field("page") String page);
 
     @POST("index/train/curriculum_show")
     @Headers({"Content-Type:application/x-www-form-urlencoded"})
