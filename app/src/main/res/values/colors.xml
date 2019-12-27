@@ -8,14 +8,18 @@
     <color name="white">#ffffff</color>
     <color name="colorgenn">#A9E16B</color>
     <color name="black">#000000</color>
+    <color name="blacks">#FF000000</color>
     <color name="shop">#00837B</color>
     <color name="blackmangement">#333333</color>
     <color name="greyhous">#999999</color>
     <color name="red">#FFEB2121</color>
     <color name="gray">#FF5E6067</color>
+    <color name="grays">#FF75788C</color>
     <color name="whites">#FFFFFFFF</color>
     <color name="txt_bg">#F7F6F6</color>
+    <color name="line_grays">#FFFAFAFA</color>
     <color name="line_gray">#ECE9E9</color>
+    <color name="beige">#FFD7AB70</color>
 
 ∂
 </resources>
