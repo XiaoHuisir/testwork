@@ -6,26 +6,41 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.app.Constant;
 import com.example.myapplication.base.BaseFragment;
+import com.example.myapplication.bean.UserCenterBean;
 import com.example.myapplication.interfaces.IBasePresenter;
+import com.example.myapplication.interfaces.usercenter.UsercenterConstract;
+import com.example.myapplication.presenter.home.IndexPresenter;
+import com.example.myapplication.presenter.usercenter.UserCenterPresenter;
 
-public class Mine_Fragment extends BaseFragment {
+public class Mine_Fragment extends BaseFragment implements UsercenterConstract.View {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_, container, false);
-    }
 
     @Override
     protected IBasePresenter getPresenter() {
-        return null;
+        return new UserCenterPresenter();
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.fragment_my;
     }
 
+    @Override
+    protected void initView() {
+        super.initView();
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        ((UserCenterPresenter) mPresenter).usercenter(Constant.mobiles, Constant.passwords);
+    }
+
+    @Override
+    public void UserCenterReturn(UserCenterBean result) {
+
+
+    }
 }

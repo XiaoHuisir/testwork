@@ -36,6 +36,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     RelativeLayout re;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    private String mobile;
+    private String password;
 
     @Override
     protected IBasePresenter getPresenter() {
@@ -57,13 +59,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                String mobile = edPhone.getText().toString();
-                String password = edPw.getText().toString();
-                if(TextUtils.isEmpty(mobile) || TextUtils.isEmpty(password)){
-                    Toast.makeText(context,"请输入用户名和密码",Toast.LENGTH_SHORT).show();
+                mobile = edPhone.getText().toString();
+                password = edPw.getText().toString();
+                Constant.mobiles = mobile;
+                Constant.passwords = password;
+                if (TextUtils.isEmpty(mobile) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(context, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ((LoginPresenter)mPresenter).login(mobile,password);
+                ((LoginPresenter) mPresenter).login(mobile, password);
                 break;
         }
     }
@@ -71,11 +75,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void loginReturn(LoginBean result) {
-        if(result.getCode() == 10000){
-            SharedPreferencesUtil.addUserToken(context,result.getData().getUserToken());
+        if (result.getCode() == 10000) {
+            SharedPreferencesUtil.addUserToken(context, result.getData().getUserToken());
             Constant.token = result.getData().getUserToken();
             Intent intent = new Intent();
-            intent.setClass(this,MainActivity.class);
+            intent.setClass(this, MainActivity.class);
             startActivity(intent);
         }
     }

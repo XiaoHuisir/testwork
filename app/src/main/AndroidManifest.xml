@@ -14,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.acivity.exercises.ExercisesActivity"></activity>
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.acivity.login.VerifyActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -28,6 +29,7 @@
         <activity android:name=".ui.acivity.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
