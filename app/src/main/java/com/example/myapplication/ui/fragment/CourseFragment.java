@@ -102,7 +102,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
     private void getIndex() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("curriculum", String.valueOf(2));
-        map.put("type",String.valueOf(curType));
+        map.put("type", String.valueOf(curType));
         map.put("page", "1");
         ((IndexPresenter) mPresenter).getIndex(map);
     }
@@ -118,7 +118,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
 
     private void banners(IndexBean result) {
         List<IndexBean.DataBean.LbDataBean> lb_data = result.getData().getLb_data();
-        if(lb_data.size() > 0){
+        if (lb_data.size() > 0) {
             ArrayList<String> strings = new ArrayList<>();
             for (int i = 0; i < lb_data.size(); i++) {
                 String image = lb_data.get(i).getImage();
@@ -133,6 +133,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
         }
 
     }
+
     class MyLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
@@ -146,6 +147,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
         txtType2.setTextColor(getResources().getColor(R.color.black));
         txtType3.setTextColor(getResources().getColor(R.color.black));
     }
+
     @Override
     public void click(String id) {
         Intent intent = new Intent();

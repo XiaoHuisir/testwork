@@ -1,10 +1,9 @@
 package com.example.myapplication.ui.acivity.video;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
-import android.opengl.Visibility;
-import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,13 +21,13 @@ import com.example.myapplication.bean.CurriculumBean;
 import com.example.myapplication.interfaces.IBasePresenter;
 import com.example.myapplication.interfaces.contract.CurriculumConstract;
 import com.example.myapplication.presenter.curriculum.CurriculumPresenter;
+import com.example.myapplication.ui.acivity.exercises.ExercisesActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
@@ -52,12 +51,16 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
     RecyclerView pdfRecyclerview;
     @BindView(R.id.txt_sound)
     TextView txtSound;
+    @BindView(R.id.txt_intro)
+    TextView txtIntro;
     @BindView(R.id.txt_video)
     TextView txtVideo;
     @BindView(R.id.layout_sound)
     ConstraintLayout layoutSound;
     @BindView(R.id.img_teacher)
     ImageView imgTeacher;
+    @BindView(R.id.txt_evalua)
+    TextView txtEvalau;
 
     String curriulumId;
     CurriculumBean curriculumBean;
@@ -65,9 +68,8 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
     PdfAdapter pdfAdapter;
     List<CurriculumBean.DataBean.FileDataBean> pdfList;
     private SensorManager sensorManager;
-
     MediaPlayer mediaPlayer;
-
+    private boolean inxdler = true;
 
     @Override
     protected IBasePresenter getPresenter() {
@@ -85,8 +87,10 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
         pdfAdapter = new PdfAdapter(pdfList);
         pdfRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         pdfRecyclerview.setAdapter(pdfAdapter);
-
         layoutSound.setVisibility(View.GONE);
+        //TODO
+        txtDetail.setVisibility(View.VISIBLE);
+        txtIntro.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -98,13 +102,13 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
     @Override
     public void getCurriculumReturn(CurriculumBean bean) {
         curriculumBean = bean;
+
         String video_url = curriculumBean.getData().getCurriculum_data().getVideo_url_code();
         if (!TextUtils.isEmpty(video_url)) {
 
             videoplayer.setUp(video_url, JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
             //用于实现重力感应下切换横竖屏
             sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
-
             JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
             videoplayer.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
             JZVideoPlayer.setVideoImageDisplayType(JZVideoPlayer.VIDEO_IMAGE_DISPLAY_TYPE_FILL_PARENT);
@@ -122,46 +126,71 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
 
     }
 
-    @OnClick({R.id.txt_sound,R.id.txt_video})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.txt_sound, R.id.txt_video, R.id.txt_detail, R.id.txt_evalua})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.txt_sound:
                 selectSound();
                 break;
             case R.id.txt_video:
                 selectVideo();
                 break;
+            //TODO
+            case R.id.txt_detail:
+                txtIntro.setVisibility(View.VISIBLE);
+                txtDetail.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.txt_intro:
+                detail();
+                break;
+            case R.id.txt_evalua:
+                evaluats();
+                break;
         }
     }
 
-    private void selectSound(){
+    private void evaluats() {
+        Intent intent = new Intent();
+        intent.setClass(context, ExercisesActivity.class);
+        intent.putExtra("evaluat_curriulum_id", curriculumBean.getData().getHave_evaluat());
+        startActivity(intent);
+    }
+
+    //TODO
+    private void detail() {
+        txtIntro.setVisibility(View.INVISIBLE);
+        txtDetail.setVisibility(View.VISIBLE);
+
+    }
+
+    private void selectSound() {
         videoplayer.setVisibility(View.INVISIBLE);
         layoutSound.setVisibility(View.VISIBLE);
         txtSound.setVisibility(View.GONE);
-        if(videoplayer.isCurrentPlay()){
+        if (videoplayer.isCurrentPlay()) {
             JZVideoPlayerStandard.goOnPlayOnPause();
         }
         playSound();
     }
 
-    private void selectVideo(){
+    private void selectVideo() {
         videoplayer.setVisibility(View.VISIBLE);
         layoutSound.setVisibility(View.INVISIBLE);
         txtSound.setVisibility(View.VISIBLE);
-        if(mediaPlayer != null){
+        if (mediaPlayer != null) {
             mediaPlayer.pause();
         }
     }
 
-    private void playSound(){
+    private void playSound() {
         String soundUrl = curriculumBean.getData().getCurriculum_data().getAudio_url_code();
-        if(TextUtils.isEmpty(soundUrl)){
+        if (TextUtils.isEmpty(soundUrl)) {
             Toast.makeText(this, "无音频地址", Toast.LENGTH_SHORT).show();
             return;
         }
         String teacherHead = curriculumBean.getData().getCurriculum_data().getLog();
         Glide.with(context).load(teacherHead).into(imgTeacher);
-        if(mediaPlayer == null){
+        if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             try {
                 mediaPlayer.setDataSource(soundUrl);
@@ -176,11 +205,11 @@ public class VideoActivity extends BaseActivity implements CurriculumConstract.V
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(videoplayer != null && videoplayer.isCurrentPlay()){
+        if (videoplayer != null && videoplayer.isCurrentPlay()) {
             JZVideoPlayerStandard.goOnPlayOnPause();
         }
-        if(mediaPlayer != null){
-            if(mediaPlayer.isPlaying()){
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
             }
         }

@@ -78,15 +78,15 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
     protected void initView() {
         courseList = new ArrayList<>();
         studyList = new ArrayList<>();
-        courseAdapter = new CourseAdapter(courseList,this);
-        studyAdapter = new StudyAdapter(studyList,this);
+        courseAdapter = new CourseAdapter(courseList, this);
+        studyAdapter = new StudyAdapter(studyList, this);
         tabCourse.setLayoutManager(new LinearLayoutManager(context));
         tabCourse.setAdapter(courseAdapter);
         tabStudy.setLayoutManager(new LinearLayoutManager(context));
         tabStudy.setAdapter(studyAdapter);
 
         curriculumList = new ArrayList<>();
-        typeAdapter = new TypeAdapter(curriculumList,this);
+        typeAdapter = new TypeAdapter(curriculumList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(typeAdapter);
 
@@ -100,9 +100,9 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
 
     @Override
     public void getTypeIndexReturn(TypeIndexBean bean) {
-        if(courseList.size() == 0) {
+        if (courseList.size() == 0) {
             courseList.addAll(bean.getData().getCurriculum_px());
-            if(courseList.size() > 0) courseList.get(0).select = true;
+            if (courseList.size() > 0) courseList.get(0).select = true;
             studyList.addAll(bean.getData().getCurriculum_kw());
             courseAdapter.notifyDataSetChanged();
             studyAdapter.notifyDataSetChanged();
@@ -115,18 +115,19 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
 
     /**
      * 点击培训课程返回
+     *
      * @param id
      */
     @Override
     public void courseClick(int id) {
         type = 1;
-        for(TypeIndexBean.DataBean.CurriculumKwBean item:studyList){
+        for (TypeIndexBean.DataBean.CurriculumKwBean item : studyList) {
             item.select = false;
         }
-        for(TypeIndexBean.DataBean.CurriculumPxBean item:courseList){
-            if(item.getId() == id){
+        for (TypeIndexBean.DataBean.CurriculumPxBean item : courseList) {
+            if (item.getId() == id) {
                 item.select = true;
-            }else{
+            } else {
                 item.select = false;
             }
         }
@@ -140,18 +141,19 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
 
     /**
      * 点击课外学习返回
+     *
      * @param id
      */
     @Override
     public void studyClick(int id) {
         type = 2;
-        for(TypeIndexBean.DataBean.CurriculumPxBean item:courseList){
+        for (TypeIndexBean.DataBean.CurriculumPxBean item : courseList) {
             item.select = false;
         }
-        for(TypeIndexBean.DataBean.CurriculumKwBean item:studyList){
-            if(item.getId() == id){
+        for (TypeIndexBean.DataBean.CurriculumKwBean item : studyList) {
+            if (item.getId() == id) {
                 item.select = true;
-            }else{
+            } else {
                 item.select = false;
             }
         }
@@ -167,7 +169,7 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
     public void typeClick(int id) {
         Intent intent = new Intent();
         intent.setClass(context, VideoActivity.class);
-        intent.putExtra("curriulum_id",String.valueOf(id));
+        intent.putExtra("curriulum_id", String.valueOf(id));
         startActivity(intent);
     }
 }

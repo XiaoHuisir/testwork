@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Constant {
 
-//    public static final String URl = "http://123.206.58.124:8025/index/user/login";
+    //    public static final String URl = "http://123.206.58.124:8025/index/user/login";
     public static final String URl = "http://sc.minxj.com/api/";
     public static final String BaseUrl = "http://123.206.58.124:8025/";
     public static final String IndexBaseUrl = "http://www.sosoapi.com/pass/mock/";
@@ -17,6 +17,9 @@ public class Constant {
     public static String token = "";
 
     public static int CourseType = 2;
+
+    public static  String mobiles = "";
+    public static  String passwords = "";
 
     public static final int COURSE_TYPE_1 = 1; //课外学习
     public static final int COURSE_TYPE_2 = 2; //培训

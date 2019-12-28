@@ -18,7 +18,7 @@ public class TypeAdapter extends BaseAdapter {
 
     TypeItemClick itemClick;
 
-    public TypeAdapter(List<TypeIndexBean.DataBean.CurriculumDataBean> list,TypeItemClick itemClick){
+    public TypeAdapter(List<TypeIndexBean.DataBean.CurriculumDataBean> list, TypeItemClick itemClick) {
         super(list);
         this.itemClick = itemClick;
     }
@@ -31,11 +31,11 @@ public class TypeAdapter extends BaseAdapter {
     @Override
     protected void bindData(BaseViewHolder holder, int positon, Object o) {
         TypeIndexBean.DataBean.CurriculumDataBean bean = (TypeIndexBean.DataBean.CurriculumDataBean) mDatas.get(positon);
-        ImageView img_head = (ImageView)holder.getView(R.id.img_head);
-        TextView txt_title = (TextView)holder.getView(R.id.txt_title);
-        TextView txt_name = (TextView)holder.getView(R.id.txt_name);
-        TextView txt_work = (TextView)holder.getView(R.id.txt_work);
-        TextView txt_study = (TextView)holder.getView(R.id.txt_study);
+        ImageView img_head = (ImageView) holder.getView(R.id.img_head);
+        TextView txt_title = (TextView) holder.getView(R.id.txt_title);
+        TextView txt_name = (TextView) holder.getView(R.id.txt_name);
+        TextView txt_work = (TextView) holder.getView(R.id.txt_work);
+        TextView txt_study = (TextView) holder.getView(R.id.txt_study);
         Glide.with(mContext).load(bean.getLog()).transform(new RoundedCorners(5))
                 .into(img_head);
         txt_title.setText(bean.getTitle());
@@ -43,9 +43,9 @@ public class TypeAdapter extends BaseAdapter {
         txt_work.setText(bean.getGs());
         float num = Float.parseFloat(bean.getJd());
         String str = "";
-        if(num > 0){
-            str = "已学习："+(int)(num*100)+"%  >";
-        }else{
+        if (num > 0) {
+            str = "已学习：" + (int) (num * 100) + "%  >";
+        } else {
             str = "未学习  >";
         }
         txt_study.setText(str);
@@ -55,14 +55,14 @@ public class TypeAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int id = (int) v.getTag();
-                if(itemClick != null){
+                if (itemClick != null) {
                     itemClick.typeClick(id);
                 }
             }
         });
     }
 
-    public interface TypeItemClick{
+    public interface TypeItemClick {
         void typeClick(int id);
     }
 
