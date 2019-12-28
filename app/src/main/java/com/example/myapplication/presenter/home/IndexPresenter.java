@@ -13,7 +13,7 @@ import java.util.Map;
 public class IndexPresenter extends BasePresenter<IndexConstract.View> implements IndexConstract.Presenter {
     @Override
     public void getIndex(Map<String, String> map) {
-        addSubscribe(HttpUtils.getMyServer(Constant.BaseUrl).getIndex(Constant.token,map.get("curriculum"),map.get("type"),map.get("page"))
+        addSubscribe(HttpUtils.getMyServer(Constant.BaseUrl).getIndex(Constant.token,map)
                 .compose(RxUtils.<IndexBean>rxScheduler())
                 .subscribeWith(new CommonSubscriber<IndexBean>(mView) {
                     @Override

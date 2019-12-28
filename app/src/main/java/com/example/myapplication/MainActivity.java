@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.SearchEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.example.myapplication.app.Constant;
 import com.example.myapplication.base.BaseActivity;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout mFl;
     @BindView(R.id.searchView)
     SearchView mSearchView;
+    @BindView(R.id.layout_search)
+    RelativeLayout layoutSearch;
 
 
     private FragmentManager manager;
@@ -112,12 +115,15 @@ public class MainActivity extends AppCompatActivity {
         switch (type){
             case 0:
                 transaction.replace(R.id.fl,homeFragment).commit();
+                layoutSearch.setVisibility(View.VISIBLE);
                 break;
             case 1:
                 transaction.replace(R.id.fl,classifyFragment).commit();
+                layoutSearch.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 transaction.replace(R.id.fl,mineFragment).commit();
+                layoutSearch.setVisibility(View.GONE);
                 break;
         }
     }

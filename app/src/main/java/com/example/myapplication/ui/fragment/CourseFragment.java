@@ -38,7 +38,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    int curType = 1;
+    int curType = 0;
     @BindView(R.id.txt_type_1)
     DrawableCenterTextView txtType1;
     @BindView(R.id.txt_type_2)
@@ -102,6 +102,7 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
     private void getIndex() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("curriculum", String.valueOf(2));
+        map.put("type",String.valueOf(curType));
         map.put("page", "1");
         ((IndexPresenter) mPresenter).getIndex(map);
     }
@@ -116,18 +117,21 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
     }
 
     private void banners(IndexBean result) {
-        ArrayList<String> strings = new ArrayList<>();
         List<IndexBean.DataBean.LbDataBean> lb_data = result.getData().getLb_data();
-        for (int i = 0; i < lb_data.size(); i++) {
-            String image = lb_data.get(i).getImage();
-            strings.add(image);
+        if(lb_data.size() > 0){
+            ArrayList<String> strings = new ArrayList<>();
+            for (int i = 0; i < lb_data.size(); i++) {
+                String image = lb_data.get(i).getImage();
+                strings.add(image);
+            }
+            banner.setImages(strings)
+                    .setImageLoader(new MyLoader())
+                    .setDelayTime(2000)
+                    .isAutoPlay(true)
+                    .setIndicatorGravity(BannerConfig.CENTER)
+                    .setBannerAnimation(Transformer.Accordion).start();
         }
-        banner.setImages(strings)
-        .setImageLoader(new MyLoader())
-        .setDelayTime(2000)
-        .isAutoPlay(true)
-        .setIndicatorGravity(BannerConfig.CENTER)
-        .setBannerAnimation(Transformer.Accordion).start();
+
     }
     class MyLoader extends ImageLoader {
         @Override

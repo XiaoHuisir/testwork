@@ -100,21 +100,26 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
 
     @Override
     public void getTypeIndexReturn(TypeIndexBean bean) {
-        courseList.clear();
-        courseList.addAll(bean.getData().getCurriculum_px());
-        studyList.clear();
-        studyList.addAll(bean.getData().getCurriculum_kw());
-        courseAdapter.notifyDataSetChanged();
-        studyAdapter.notifyDataSetChanged();
-
+        if(courseList.size() == 0) {
+            courseList.addAll(bean.getData().getCurriculum_px());
+            if(courseList.size() > 0) courseList.get(0).select = true;
+            studyList.addAll(bean.getData().getCurriculum_kw());
+            courseAdapter.notifyDataSetChanged();
+            studyAdapter.notifyDataSetChanged();
+        }
         curriculumList.clear();
         curriculumList.addAll(bean.getData().getCurriculum_data());
         typeAdapter.notifyDataSetChanged();
 
     }
 
+    /**
+     * 点击培训课程返回
+     * @param id
+     */
     @Override
     public void courseClick(int id) {
+        type = 1;
         for(TypeIndexBean.DataBean.CurriculumKwBean item:studyList){
             item.select = false;
         }
@@ -129,11 +134,17 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
         layoutCourse.setBackgroundResource(R.drawable.tab_bg);
         courseAdapter.notifyDataSetChanged();
         studyAdapter.notifyDataSetChanged();
-
+        //刷新分类数据
+        initData();
     }
 
+    /**
+     * 点击课外学习返回
+     * @param id
+     */
     @Override
     public void studyClick(int id) {
+        type = 2;
         for(TypeIndexBean.DataBean.CurriculumPxBean item:courseList){
             item.select = false;
         }
@@ -148,6 +159,8 @@ public class ClassifyFragment extends BaseFragment implements TypeIndexConstact.
         layoutStudy.setBackgroundResource(R.drawable.tab_bg);
         courseAdapter.notifyDataSetChanged();
         studyAdapter.notifyDataSetChanged();
+        //刷新分类数据
+        initData();
     }
 
     @Override

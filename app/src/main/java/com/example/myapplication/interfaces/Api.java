@@ -27,7 +27,7 @@ public interface Api {
 
     @POST("index/train/index")
     @FormUrlEncoded
-    Flowable<IndexBean> getIndex(@Header("x-access-token") String token,@Field("curriculum") String curriculum,@Field("type") String type,@Field("page") String page);
+    Flowable<IndexBean> getIndex(@Header("x-access-token") String token,@FieldMap Map<String,String> map);
 
     @POST("index/train/type_index")
     @FormUrlEncoded

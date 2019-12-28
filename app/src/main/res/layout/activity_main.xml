@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <RelativeLayout
-        android:id="@+id/frame"
+        android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!--<include layout="@layout/view_toolbar"
@@ -33,7 +33,7 @@
         android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/frame"
+        android:layout_below="@id/layout_search"
         android:layout_above="@id/tl"
 
         />

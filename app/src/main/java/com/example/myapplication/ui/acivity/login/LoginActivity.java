@@ -47,7 +47,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         return R.layout.activity_login;
     }
 
-
+    @Override
+    protected void initView() {
+        edPhone.setFocusable(false);
+        edPw.setFocusable(false);
+    }
 
     @OnClick({R.id.btn_login})
     public void onViewClicked(View view) {
