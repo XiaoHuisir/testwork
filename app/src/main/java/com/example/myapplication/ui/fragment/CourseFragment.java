@@ -102,7 +102,6 @@ public class CourseFragment extends BaseFragment implements IndexConstract.View,
     private void getIndex() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("curriculum", String.valueOf(2));
-        map.put("type", String.valueOf(curType));
         map.put("page", "1");
         ((IndexPresenter) mPresenter).getIndex(map);
     }

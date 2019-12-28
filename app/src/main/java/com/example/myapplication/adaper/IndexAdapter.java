@@ -42,7 +42,8 @@ public class IndexAdapter extends BaseAdapter {
         txt_work.setText(bean.getGs());
 
         TextView txt_study_state = (TextView)holder.getView(R.id.txt_study_state);
-        txt_study_state.setText(bean.getJd());
+        String progress = ((int)(Float.valueOf(bean.getJd())*100))+"%";
+        txt_study_state.setText(progress);
 
         ConstraintLayout layout = (ConstraintLayout) holder.getView(R.id.layout_item);
         layout.setTag(String.valueOf(bean.getId()));

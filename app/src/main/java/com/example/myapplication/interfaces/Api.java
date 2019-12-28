@@ -26,17 +26,14 @@ public interface Api {
     Flowable<LoginBean> login(@Field("mobile") String mobile,@Field("password") String password);
 
     @POST("index/train/index")
-    @Headers({"Content-Type:application/x-www-form-urlencoded"})
     @FormUrlEncoded
     Flowable<IndexBean> getIndex(@Header("x-access-token") String token,@Field("curriculum") String curriculum,@Field("type") String type,@Field("page") String page);
 
     @POST("index/train/type_index")
-    @Headers({"Content-Type:application/x-www-form-urlencoded"})
     @FormUrlEncoded
     Flowable<TypeIndexBean> getTypeIndex(@Header("x-access-token") String token, @Field("type") String type, @Field("page") String page);
 
     @POST("index/train/curriculum_show")
-    @Headers({"Content-Type:application/x-www-form-urlencoded"})
     @FormUrlEncoded
     Flowable<CurriculumBean> getCurriculum(@Header("x-access-token") String token, @Field("curriculum_id") String curriculum_id);
 
