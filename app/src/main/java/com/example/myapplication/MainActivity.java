@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setQueryHint("搜索");
+        mSearchView.setFocusable(false);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
